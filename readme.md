@@ -10,7 +10,7 @@ The above is the network, we are going to compute the gradients and do backpropa
 
 Now let's write down all the equations for outputs. While h1, h2, o1, o2 are weighted sum of respective inputs, a_h1, a_h2, a_o1 and a_o2 are the activate output of weighted sums.
 
-### Hidden Layer equations
+## Hidden Layer equations
 ![formula](https://render.githubusercontent.com/render/math?math=\color{Green}\large%20h_{1}%20=%20W_{1}%2Ai_{1}%20%2B%20W_{2}%2Ai_{2})
 
 ![formula](https://render.githubusercontent.com/render/math?math=\color{Green}\large%20h_{2}%20=%20W_{3}%2Ai_{1}%20%2B%20W_{4}%2Ai_{2})
