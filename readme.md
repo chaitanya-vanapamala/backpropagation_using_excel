@@ -1,8 +1,6 @@
-[//]: ![formula](https://render.githubusercontent.com/render/math?math=\color{red}\Huge%20\frac{\partial%20f}{\partial%20x})
-
 # Backpropagation through Excel - END2
 
-In this, I will try to demonstrate the working of backpropagation in neural netwroks. Let's take a neural network with 1 hidden layer, and we will do a binary classification using L2 Loss function.
+In this, I will try to demonstrate the working of backpropagation in neural netwrok using excel. Let's take a neural network with 1 hidden layer & output layer, and we will do a binary classification using L2 Loss function.
 
 ![Network Architecture](https://raw.githubusercontent.com/chaitanya-vanapamala/backpropagation_using_excel/main/network_arch.png)
 
@@ -19,8 +17,9 @@ Now let's write down all the equations for outputs. While h1, h2, o1, o2 are wei
 
 ![formula](https://render.githubusercontent.com/render/math?math=\color{Green}\large%20%5Ctext%7Ba_h%7D_2%20%3D%20%5Csigma%28h_2%29%20%3D%20%5Cfrac%7B1%7D%7B1%2Be%5E%7B-h_2%7D%7D)
 
-### **Output Layer equations**
-#
+*Note:* **i1 and i2 are inputs**
+
+## Output Layer equations
 ![formula](https://render.githubusercontent.com/render/math?math=\color{Royalblue}\large%20o_1%20%3D%20W_5%2A%5Ctext%7Ba_h%7D_1%2BW_6%2A%5Ctext%7Ba_h%7D_2)
 
 ![formula](https://render.githubusercontent.com/render/math?math=\color{Royalblue}\large%20o_2%20%3D%20W_7%2A%5Ctext%7Ba_h%7D_1%2BW_8%2A%5Ctext%7Ba_h%7D_2)
@@ -29,8 +28,8 @@ Now let's write down all the equations for outputs. While h1, h2, o1, o2 are wei
 
 ![formula](https://render.githubusercontent.com/render/math?math=\color{Royalblue}\large%20%5Ctext%7Ba_o%7D_2%20%3D%20%5Csigma%28o_2%29%20%3D%20%5Cfrac%7B1%7D%7B1%2Be%5E%7B-o_2%7D%7D)
 
-### **Loss equations**
-#
+## Loss equations
+
 The loss function we are going to use is L2 Loss function i.e, Mean Squared Error.
 
 ![formula](https://render.githubusercontent.com/render/math?math=\color{red}\large%20E_1%3D%5Cfrac%7B1%7D%7B2%7D%2A%28t_1-%5Ctext%7Ba_o%7D_1%29%5E2)
@@ -41,12 +40,20 @@ The loss function we are going to use is L2 Loss function i.e, Mean Squared Erro
 
 *Note:* **t1 and t2 are target outputs**
 
-## **Finding Gradients**
-#
+
+# Backpropagation
+In order to train the nueral network we need to do backprorogation. We try to fit the nueral network to our train data by finding optimal weights. The update of weights is done after computing the gradient of loss function with respect to the weights, and the new weights will be determined with the following formula:
+
+![W_i(new)=W_i(old)-\eta*\frac{\partial \text{E_total}}{\partial W_i}](https://render.githubusercontent.com/render/math?math=\color{YellowOrange}\Large%20W_i%28new%29%3DW_i%28old%29-%5Ceta%2A%5Cfrac%7B%5Cpartial%20%5Ctext%7BE_total%7D%7D%7B%5Cpartial%20W_i%7D)
+
+Where η is the learning rate, which determines how much the weight should get updated. So, let's start finding the Gradeints one by one.
+
+## Finding Gradients
+
 Let's start computing the gradient of weights from output layer weights.
 
-## **Gradients of Output Layer Weights**
-#
+## Gradient of Loss with respect to Output Layer Weights
+
 ### **Loss Gradient with respect to W<sub>5</sub>**
 ![formula](https://render.githubusercontent.com/render/math?math=\color{red}\Large%20%5Cfrac%7B%5Cpartial%5Ctext%7B%20E_Total%7D%7D%7B%5Cpartial%20W_5%7D%3D%5Cfrac%7B%5Cpartial%20%28E_1%2BE_2%29%7D%7B%5Cpartial%20W_5%7D)
 
@@ -146,8 +153,8 @@ from the equations 5 and 6.
 
 ![\frac{\partial\text{ E_Total}}{\partial W_8}=(\text{a_o}_2-t_2)*\text{a_o}_2*(1-\text{a_o}_2)*\text{a_h}_1](https://render.githubusercontent.com/render/math?math=\color{purple}\huge%20%5Cfrac%7B%5Cpartial%5Ctext%7B%20E_Total%7D%7D%7B%5Cpartial%20W_8%7D%3D%28%5Ctext%7Ba_o%7D_2-t_2%29%2A%5Ctext%7Ba_o%7D_2%2A%281-%5Ctext%7Ba_o%7D_2%29%2A%5Ctext%7Ba_h%7D_2)
 
-## **Gradients of Hidden Layer Weights**
-#
+## Gradients of Hidden Layer Weights
+
 Before computing Gradients of W1, W2, W3, and W4, Let's first calculate the Loss gradient with respect to output of hidden layer nuerons(a_h1, a_h2), this will help us to easily find out the Weight Gradients.
 
 ![\frac{\partial\text{ E_Total}}{\partial \text{a_h}_1}=\frac{\partial(E_1+E_2)}{\partial \text{a_h}_1}](https://render.githubusercontent.com/render/math?math=\color{red}\Large%20%5Cfrac%7B%5Cpartial%5Ctext%7B%20E_Total%7D%7D%7B%5Cpartial%20%5Ctext%7Ba_h%7D_1%7D%3D%5Cfrac%7B%5Cpartial%28E_1%2BE_2%29%7D%7B%5Cpartial%20%5Ctext%7Ba_h%7D_1%7D)
@@ -225,3 +232,23 @@ And on the same note the Gradient with respect to W4 becomes
 ![\frac{\partial\text{ E_Total}}{\partial W_4}=((\text{a_o}_1-t_1)*\text{a_o}_1*(1-\text{a_o}_1)*W_6+](https://render.githubusercontent.com/render/math?math=\color{purple}\huge%20%5Cfrac%7B%5Cpartial%5Ctext%7B%20E_Total%7D%7D%7B%5Cpartial%20W_4%7D%3D%28%28%5Ctext%7Ba_o%7D_1-t_1%29%2A%5Ctext%7Ba_o%7D_1%2A%281-%5Ctext%7Ba_o%7D_1%29%2AW_6%2B)
 ![\\(\text{a_o}_2-t_2)*\text{a_o}_2*(1-\text{a_o}_2)* W_8)*
 \text{a_h}_1*(1-\text{a_h}_1)*i_2](https://render.githubusercontent.com/render/math?math=\color{purple}\huge%20%5C%5C%28%5Ctext%7Ba_o%7D_2-t_2%29%2A%5Ctext%7Ba_o%7D_2%2A%281-%5Ctext%7Ba_o%7D_2%29%2A%20W_8%29%2A%0A%5Ctext%7Ba_h%7D_1%2A%281-%5Ctext%7Ba_h%7D_1%29%2Ai_2)
+
+Now we can use these gradients of loss with respect to each weight to compute the new weights and repeat the process for several times. **The η value is taken as 0.5 for this output**.
+
+![Backpropogation Excel Output](https://raw.githubusercontent.com/chaitanya-vanapamala/backpropagation_using_excel/main/backpropagation_output_at_lr_0.5.png)
+
+We can see from the above image the loss it reducing as the iterations are increasing, which is a clearing sigh that our nueral netowrk is able to learn.
+
+# Impact of Learning Rate η
+
+AS we have seen earlier that the weight updates are done based on learning rate, if learning rate is high the weights get updated faster and the loss also decreases faster and gets slower if learnign rate is low.
+
+![learning rate impact](https://raw.githubusercontent.com/chaitanya-vanapamala/backpropagation_using_excel/main/learning_rate_impact.png)
+
+We can clearly see that the loss is drastically decreasing in the iniatal iterations only for learning rate higher than 0.5 and the stablising from there after. But for learnign rate less than or equal to 0.5 its a steep line, which is stating the the loss is slowingly decreasing for the lower learning rates as the weights are updating very less, and its reverse case for higher learning rates.
+
+### Group member for the assignment:
+- Chaitanya Vanapamala
+- Ritambhra Korpal
+- Pralay Ramteke
+- Pallavi Allada
